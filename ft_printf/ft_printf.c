@@ -6,7 +6,7 @@
 /*   By: fzutter <fzutter@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 07:23:25 by fzutter           #+#    #+#             */
-/*   Updated: 2023/12/05 16:55:24 by fzutter          ###   ########.fr       */
+/*   Updated: 2023/12/19 16:32:49 by fzutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,56 @@ static	int	ft_putchar(char c)
 	return (1);
 }
 
+static	int	ft_putstr(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (s == NULL)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	while (s[i] != '\0')
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	return (i);
+}
+
+static int	ft_puthex(int n)
+{
+	char	nb[100];
+	int		i;
+	int		count;
+	int		temp;
+
+	i = 0;
+	count = 0;
+	temp = 0;
+	if (n == 0)
+	{
+		write(1, "0", 1);
+		return (1);
+	}
+	while (n != 0)
+	{
+		temp = n % 16;
+		if (temp < 10)
+			temp = temp +48;
+		else
+			temp = temp +87;
+		nb[i] = temp;
+		n = n / 16;
+		i++;
+	}
+	count = i;
+	while (i > 0)
+		write(1, &nb[i-- - 1], 1);
+	return (count);
+}
+
 static	int	ft_arg_type(char type, va_list args)
 {
 	int	count_arg;
@@ -67,6 +117,10 @@ static	int	ft_arg_type(char type, va_list args)
 		count_arg = ft_putnbr(va_arg(args, int));
 	if (type == 'c')
 		count_arg = ft_putchar(va_arg(args, int));
+	if (type == 's')
+		count_arg = ft_putstr(va_arg(args, char *));
+	if (type == 'x')
+		count_arg = ft_puthex(va_arg(args, int));
 	return (count_arg);
 }
 
