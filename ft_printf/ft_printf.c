@@ -6,46 +6,11 @@
 /*   By: fzutter <fzutter@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 07:23:25 by fzutter           #+#    #+#             */
-/*   Updated: 2023/12/19 16:32:49 by fzutter          ###   ########.fr       */
+/*   Updated: 2024/01/16 14:18:41 by fzutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
-static int	ft_putnbr(int n)
-{
-	char	nb[12];
-	int		i;
-	int		temp;
-
-	i = 0;
-	temp = 0;
-	if (n == -2147483648)
-	{
-		nb[i++] = '8';
-		n = n / 10;
-	}
-	if (n == 0)
-	{
-		write(1, "0", 1);
-		return (1);
-	}
-	if (n < 0)
-	{
-		write(1, "-", 1);
-		n = n * -1;
-		temp++;
-	}
-	while (n != 0)
-	{
-		nb[i++] = (n % 10) + '0';
-		n = n / 10;
-	}
-	temp = temp + i;
-	while (i > 0)
-		write(1, &nb[i-- - 1], 1);
-	return (temp);
-}
 
 static	int	ft_putchar(char c)
 {
@@ -121,6 +86,10 @@ static	int	ft_arg_type(char type, va_list args)
 		count_arg = ft_putstr(va_arg(args, char *));
 	if (type == 'x')
 		count_arg = ft_puthex(va_arg(args, int));
+	if (type == 'u')
+		count_arg = ft_putunnbr(va_arg(args, unsigned int));
+	if (type == 'p')
+		count_arg = ft_putadd(va_arg(args, void const *));
 	return (count_arg);
 }
 

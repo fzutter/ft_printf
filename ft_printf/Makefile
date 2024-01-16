@@ -6,11 +6,11 @@
 #    By: fzutter <fzutter@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 07:11:37 by fzutter           #+#    #+#              #
-#    Updated: 2023/12/05 15:13:13 by fzutter          ###   ########.fr        #
+#    Updated: 2024/01/16 14:15:47 by fzutter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = ft_printf.c 
+SRC = ft_printf.c ft_putnbr.c ft_putunnbr.c ft_putadd.c 
 
 OBJ = $(SRC:.c=.o)
 

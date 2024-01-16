@@ -1,25 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_putadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fzutter <fzutter@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 07:16:41 by fzutter           #+#    #+#             */
-/*   Updated: 2024/01/16 14:18:39 by fzutter          ###   ########.fr       */
+/*   Created: 2024/01/16 14:08:12 by fzutter           #+#    #+#             */
+/*   Updated: 2024/01/16 14:19:32 by fzutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#include "libftprintf.h"
 
-# include <stdio.h>
-# include <stdarg.h>
-# include <unistd.h>
+int	ft_putadd(void const *p)
+{
+	unsigned long	adr;
+	char const		*base;
+	char			res[9];
+	int				i;
 
-int		ft_printf(const char *format, ...);
-int		ft_putnbr(int n);
-int		ft_putunnbr(unsigned int n);
-int		ft_putadd(void const *p);
-
-#endif
+	adr = (unsigned long) p;
+	base = "0123456789abcdef";
+	i = 8;
+	while ((adr / 16) > 0 || i >= 8)
+	{
+		res[i] = base[(adr % 16)];
+		adr /= 16;
+		i--;
+	}
+	res[i] = base[(adr % 16)];
+	putchar ('0');
+	putchar ('x');
+	while (i < 9)
+	{
+		putchar (res[i]);
+		i++;
+	}
+	return (2);
+}
