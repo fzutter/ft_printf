@@ -6,7 +6,7 @@
 /*   By: fzutter <fzutter@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:14:25 by fzutter           #+#    #+#             */
-/*   Updated: 2023/12/05 16:55:25 by fzutter          ###   ########.fr       */
+/*   Updated: 2024/02/06 11:10:35 by fzutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,9 @@
 # include <unistd.h>
 
 int		ft_printf(const char *format, ...);
+int		ft_putnbr(int n);
+int		ft_putunnbr(unsigned int n);
+int		ft_putadd(void const *p);
+int		ft_putchar(char c);
 
 #endif

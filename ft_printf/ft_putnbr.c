@@ -6,11 +6,11 @@
 /*   By: fzutter <fzutter@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 07:25:50 by fzutter           #+#    #+#             */
-/*   Updated: 2024/01/16 08:13:00 by fzutter          ###   ########.fr       */
+/*   Updated: 2024/02/06 11:10:25 by fzutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	nbr_zero(void)
 {

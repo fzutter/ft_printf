@@ -6,13 +6,13 @@
 /*   By: fzutter <fzutter@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 07:23:25 by fzutter           #+#    #+#             */
-/*   Updated: 2024/01/16 14:18:41 by fzutter          ###   ########.fr       */
+/*   Updated: 2024/02/06 11:10:20 by fzutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-static	int	ft_putchar(char c)
+int	ft_putchar(char c)
 {
 	write(1, &c, 1);
 	return (1);
@@ -36,36 +36,22 @@ static	int	ft_putstr(char *s)
 	return (i);
 }
 
-static int	ft_puthex(int n)
+static int	ft_puthex(int n, char type)
 {
-	char	nb[100];
-	int		i;
-	int		count;
-	int		temp;
+	char			*base;
+	int				i;
+	unsigned int	num;
 
+	if (type == 'x')
+		base = "0123456789abcdef";
+	else
+		base = "0123456789ABCDEF";
 	i = 0;
-	count = 0;
-	temp = 0;
-	if (n == 0)
-	{
-		write(1, "0", 1);
-		return (1);
-	}
-	while (n != 0)
-	{
-		temp = n % 16;
-		if (temp < 10)
-			temp = temp +48;
-		else
-			temp = temp +87;
-		nb[i] = temp;
-		n = n / 16;
-		i++;
-	}
-	count = i;
-	while (i > 0)
-		write(1, &nb[i-- - 1], 1);
-	return (count);
+	num = (unsigned int) n;
+	if (num > 16 - 1)
+		i += ft_puthex(num / 16, type);
+	i += ft_putchar(*(base + (num % 16)));
+	return (i);
 }
 
 static	int	ft_arg_type(char type, va_list args)
@@ -84,8 +70,8 @@ static	int	ft_arg_type(char type, va_list args)
 		count_arg = ft_putchar(va_arg(args, int));
 	if (type == 's')
 		count_arg = ft_putstr(va_arg(args, char *));
-	if (type == 'x')
-		count_arg = ft_puthex(va_arg(args, int));
+	if (type == 'x' || type == 'X')
+		count_arg = ft_puthex(va_arg(args, int), type);
 	if (type == 'u')
 		count_arg = ft_putunnbr(va_arg(args, unsigned int));
 	if (type == 'p')
@@ -139,4 +125,10 @@ int	main(void)
 	printf("\n");
 	printf("Test 6 pointer %p\n", "rere");
 	ft_printf("Test 6 pointer %p\n", "rere");
+	printf("\n");
+	printf("Test 7 pointer %x\n", '-521');
+	ft_printf("Test 7 pointer %x\n", '-521');
+	printf("\n");
+	printf("Test 8 pointer %X\n", '3248');
+	ft_printf("Test 8 pointer %X\n", '3248');
 }*/
